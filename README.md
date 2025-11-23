@@ -78,3 +78,79 @@ Per assegnare correttamente i valori dei tipi "nuovi", consultiamo la [JavaDoc](
 ```
 
 Implementato il modello dei dati, raccolta la documentazione utile in futuro e testato quanto implementato, possiamo passare alla seconda carta.
+
+## Carta 2 - Gestire oggetti in una collezione
+Fino ad adesso, abbiamo gestito un singolo evento. Tuttavia, l'applicazione calendario ci permette di gestire un insieme (collezione) di eventi.
+
+La carta ci suggerisce di creare una classe `Calendario` all'interno della quale inseriremo una lista di `Evento`.
+
+### Scelta della struttura per memorizzare un insieme di dati
+Come lista, useremo la classe `ArrayList` di Java, che include sia le funzionalità di un `Array` (es. accesso agli elementi per indice), sia quelle tipiche delle `List` (es. dimensione dinamica, ordinamento, ricerca, rimozione, ...). Qui la [JavaDoc](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html) delle `ArrayList`.
+
+Anche questa classe, come tutte le altre non già incluse, deve essere importata all'inizio di ogni file che la utilizza.
+
+La sintassi per istanziare è come quella di tutte le altre classi. 
+
+### Creazione classe `Calendario` e relativi metodi
+#### Costruttori
+Creiamo un costruttore da usare quando creiamo un calendario vuoto:
+
+```java
+public Calendario() {
+    this.eventi = new ArrayList<>();
+}
+```
+
+E uno per quanto creiamo un calendario e importiamo già gli eventi:
+
+```java
+public Calendario(ArrayList<Evento> eventi) {
+    this.eventi = eventi;
+}
+```
+
+#### Getter
+Creiamo un getter per restituire la lista. Invece di restituire l'indirizzo della lista originale restituiamo una nuova lista (copia), perché altrimenti chi la usa potrebbe modificare la struttura originale con conseguenze indesiderate su tutto il codice che la condivide.
+
+```java
+public ArrayList<Evento> getListaEventi() {
+    return new ArrayList<>(eventi); 
+}
+```
+
+Predisponiamo anche una stampa degli eventi nel calendario, come richiesto dalla traccia con la segnatura `getEventi() : void`. 
+
+```java
+public void getEventi() {
+    for(int i = 0; i < this.eventi.size(); i++) {
+        System.out.println(i+1 + ". " + eventi.get(i));
+    }
+}
+```
+
+#### Metodo per aggiunta evento
+Gli `ArrayList` hanno un metodo (consultabile dalla JavaDoc allegata più sopra) per aggiungere un elemento alla collezione.
+
+```java
+public void addEvento(Evento e)  {
+    this.eventi.add(e);
+}
+```
+
+### Test
+```java
+Calendario calendario = new Calendario();
+
+// 1 - Test addEvento(Evento e) : void
+calendario.addEvento(e);
+calendario.addEvento(new Evento("Leggere", "Finire fino al capitolo 3", LocalDateTime.of(2025, 12, 5, 10, 45)));
+
+// 2 - Test getEventi() : void
+calendario.getEventi();
+```
+
+Output
+```
+1. Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
+2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
+```
