@@ -306,3 +306,52 @@ Evento modificato correttamente
 1. Evento Fare la spesa del 2025-12-01T11:00 (Comprare frutta e verdura)
 2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
 ```
+
+## Carta 6 - Cercare un oggetto nella collezione usando `LocalDateTime`
+La funzione `cercaEvento(LocalDate d) : ArrayList<Evento>` permette di cercare tutti gli eventi nella lista eventi che si svolgono in una determinata data. La funzione restituisce una nuova lista contenente tutti gli eventi che corrispondono alla data fornita dall'utente. Se non ci sono eventi nella data specificata, la lista restituita sarà vuota.
+
+### Implementazione ricerca
+#### Logica in pseudocodice
+1. Creare una lista vuota risultati
+2. Scorrere tutti gli eventi nella lista eventi
+3. Per ciascun evento, controllare se la data di `dataOra` è uguale (`.equals(Object obj)`) a `d`
+4. Se corrisponde, aggiungere l'evento alla lista risultati
+5. Restituire la lista risultati
+
+#### Java
+```java
+// Filtro eventi per data di svolgimento
+public ArrayList<Evento> cercaEvento(LocalDate d) {
+    ArrayList<Evento> risultati = new ArrayList<>();
+    for(Evento e : eventi) {
+        if(e.getDataOra().toLocalDate().equals(d)) {
+            risultati.add(e);
+        }
+    }
+    return risultati;
+}
+
+// Overload getEventi per stampare eventi passati come parametro
+public void getEventi(ArrayList<Evento> eventi) {
+    if(eventi.isEmpty()) {
+        System.out.println("Nessun evento da mostrare");
+        return;
+    }
+    int count = 1;
+    for(Evento evento : eventi) {
+        System.out.println(count + ". " + evento);
+        count++;
+    }
+}
+```
+
+#### Test
+```java
+LocalDate dataRicerca = LocalDate.now(); // Oggi
+ArrayList<Evento> risultatiRicerca = calendario.cercaEvento(dataRicerca);
+calendario.getEventi(risultatiRicerca);
+```
+
+```
+1. Evento Leggere del 2025-11-23T15:48:01.623690300 (Finire fino al capitolo 3)
+```

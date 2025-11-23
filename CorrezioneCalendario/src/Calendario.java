@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -62,4 +63,29 @@ public class Calendario {
         }
         return false;
     }
+
+    // Filtro eventi per data di svolgimento
+    public ArrayList<Evento> cercaEvento(LocalDate d) {
+        ArrayList<Evento> risultati = new ArrayList<>();
+        for(Evento e : eventi) {
+            if(e.getDataOra().toLocalDate().equals(d)) {
+                risultati.add(e);
+            }
+        }
+        return risultati;
+    }
+
+    // Overload getEventi per stampare eventi passati come parametro
+    public void getEventi(ArrayList<Evento> eventi) {
+        if(eventi.isEmpty()) {
+            System.out.println("Nessun evento da mostrare");
+            return;
+        }
+        int count = 1;
+        for(Evento evento : eventi) {
+            System.out.println(count + ". " + evento);
+            count++;
+        }
+    }
+
 }

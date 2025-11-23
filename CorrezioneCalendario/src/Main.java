@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class Main {
 
         // 1 - Test addEvento(Evento e) : void
         calendario.addEvento(e);
-        calendario.addEvento(new Evento("Leggere", "Finire fino al capitolo 3", LocalDateTime.of(2025, 12, 5, 10, 45)));
+        calendario.addEvento(new Evento("Leggere", "Finire fino al capitolo 3", LocalDateTime.now()));
 
         // 2 - Test getEventi() : void
         calendario.getEventi();
@@ -62,5 +64,12 @@ public class Main {
         }
 
         calendario.getEventi();
+
+        // CARTA 6
+        System.out.println("\n--- CARTA 6 ---");
+
+        LocalDate dataRicerca = LocalDate.now(); // Oggi
+        ArrayList<Evento> risultatiRicerca = calendario.cercaEvento(dataRicerca);
+        calendario.getEventi(risultatiRicerca);
     }
 }
