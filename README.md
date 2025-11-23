@@ -210,7 +210,7 @@ Evento non esistente nel calendario
 ```
 
 ## Carta 4 - Cercare un oggetto nella collezione
-La funzione `cercaEvento(String keyword) : Evento` permette di cercare un evento nella lista eventi in base a una parola chiave fornita dall'utente e restituisce il primo evento che corrispondei ai criteri di ricerca. La ricerca considera sia il titolo sia la descrizione dell’evento e ignora le differenze tra maiuscole e minuscole.
+La funzione `cercaEvento(String keyword) : Evento` permette di cercare un evento nella lista eventi in base a una parola chiave fornita dall'utente e restituisce il primo evento che corrispondei ai criteri di ricerca. La ricerca considera sia il titolo sia la descrizione dell'evento e ignora le differenze tra maiuscole e minuscole.
 
 ### Implementazione ricerca
 #### Logica in pseudocodice
@@ -257,4 +257,52 @@ else {
 
 ```
 Risultato alla ricerca: Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
+```
+
+## Carta 5 - Modificare un oggetto nella collezione
+La funzione `modificaEvento(int i, String titolo, String descrizione, LocalDateTime dataOra) : boolean` permette di modificare un evento esistente nella lista eventi a partire dal suo indice. Se l'indice è valido, la funzione aggiorna tutti i campi dell'evento con i valori forniti e restituisce true. Se l'indice non esiste, non viene effettuata alcuna modifica e la funzione restituisce false.
+
+### Implementazione modifica
+#### Logica in pseudocodice
+1. Verifica dell'indice
+    - Controlliamo se l'indice `i` è compreso tra `0` e `eventi.size() - 1`
+    - Se l'indice non è valido, la funzione ritorna `false`
+2. Aggiornamento dei campi
+    - Se l'indice è valido, recuperiamo l'evento corrispondente (`eventi.get(i)`)
+3. Aggiorniamo i campi dell'evento con i valori forniti:
+4. Restituzione del risultato
+    - Ritorniamo `true` se la modifica è avvenuta con successo
+    - Ritorniamo `false` se l'indice non esiste (nessuna modifica effettuata)
+
+#### Java
+```java
+public boolean modificaEvento(int i, String titolo, String descrizione, LocalDateTime dataOra) {
+    if(i >= 0 && i < eventi.size()) {
+        Evento e = eventi.get(i);
+        e.setTitolo(titolo);
+        e.setDescrizione(descrizione);
+        e.setDataOra(dataOra);
+        return true;
+    }
+    return false;
+}
+```
+
+#### Test
+```java
+if(calendario.modificaEvento(0, "Fare la spesa", "Comprare frutta e verdura", LocalDateTime.of(2025, 12, 1, 11, 0))) {
+    System.out.println("Evento modificato correttamente");
+}
+else {
+    System.out.println("Evento non esistente");
+}
+
+calendario.getEventi();
+```
+
+Output
+```
+Evento modificato correttamente
+1. Evento Fare la spesa del 2025-12-01T11:00 (Comprare frutta e verdura)
+2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
 ```

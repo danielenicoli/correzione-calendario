@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Calendario {
@@ -48,5 +49,17 @@ public class Calendario {
             }
         }
         return null; // Se non trova nulla
+    }
+
+    // Modifica di un evento dato l'indice e i nuovi valori
+    public boolean modificaEvento(int i, String titolo, String descrizione, LocalDateTime dataOra) {
+        if(i >= 0 && i < eventi.size()) {
+            Evento e = eventi.get(i);
+            e.setTitolo(titolo);
+            e.setDescrizione(descrizione);
+            e.setDataOra(dataOra);
+            return true;
+        }
+        return false;
     }
 }

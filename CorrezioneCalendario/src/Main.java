@@ -51,5 +51,16 @@ public class Main {
         else {
             System.out.println("Risultato alla ricerca: " + risultato);
         }
+
+        // CARTA 5
+        System.out.println("\n--- CARTA 5 ---");
+        if(calendario.modificaEvento(0, "Fare la spesa", "Comprare frutta e verdura", LocalDateTime.of(2025, 12, 1, 11, 0))) {
+            System.out.println("Evento modificato correttamente");
+        }
+        else {
+            System.out.println("Evento non esistente");
+        }
+
+        calendario.getEventi();
     }
 }
