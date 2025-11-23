@@ -1,0 +1,20 @@
+import java.time.LocalDateTime;
+
+public class Main {
+    public static void main(String[] args) {
+        // CARTA 1
+        // 1 - Creare un evento da console
+        Evento e = new Evento("Fare la spesa", "Comprare pane", LocalDateTime.of(2025, 12, 1, 10, 30));
+
+        // 2 - Stampare i suoi dati in console
+        System.out.println(e); // Viene automaticamente richiamato il toString() che abbiamo riscritto
+
+        // 3 - Leggere i singoli campi
+        e.setDescrizione("Comprare pane e uova");
+
+        // 4 - Stampare i singoli campi
+        System.out.println("Titolo: " + e.getTitolo());
+        System.out.println("Descrizione: " + e.getDescrizione());
+        System.out.println("Data e ora: " + e.getDataOra());
+    }
+}
