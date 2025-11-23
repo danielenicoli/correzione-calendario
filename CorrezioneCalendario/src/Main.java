@@ -19,7 +19,7 @@ public class Main {
         System.out.println("Data e ora: " + e.getDataOra());
 
         // CARTA 2
-        System.out.println("\n --- CARTA 2 ---");
+        System.out.println("\n--- CARTA 2 ---");
         Calendario calendario = new Calendario();
 
         // 1 - Test addEvento(Evento e) : void
@@ -27,6 +27,18 @@ public class Main {
         calendario.addEvento(new Evento("Leggere", "Finire fino al capitolo 3", LocalDateTime.of(2025, 12, 5, 10, 45)));
 
         // 2 - Test getEventi() : void
+        calendario.getEventi();
+
+        // CARTA 3
+        System.out.println("\n--- CARTA 3 ---");
+
+        if(calendario.removeEvento(0)) {
+            System.out.println("Evento cancellato dal calendario");
+        }
+        else {
+            System.out.println("Evento non esistente nel calendario");
+        }
+
         calendario.getEventi();
     }
 }

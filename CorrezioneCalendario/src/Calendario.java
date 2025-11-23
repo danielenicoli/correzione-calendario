@@ -29,4 +29,13 @@ public class Calendario {
     public void addEvento(Evento e)  {
         this.eventi.add(e);
     }
+
+    // Rimuove un evento in posizione i, se disponibile (boolean perché la rimozione potrebbe fallire)
+    public boolean removeEvento(int i)  {
+        if(i >= 0 && i < eventi.size()) {
+            eventi.remove(i);
+            return true;
+        }
+        return false;
+    }
 }

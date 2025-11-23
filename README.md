@@ -154,3 +154,57 @@ Output
 1. Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
 2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
 ```
+
+## Carta 3 - Rimuovere un oggetto dalla collezione
+Rimuovere un oggetto da una collezione è facilissimo: basta leggere la [JavaDoc](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html#remove-int-) delle `ArrayList` e cercare in inglese ciò che vogliamo fare, ovvero _remove_ un oggetto a partire dalla sua posizione. 
+
+Ricordiamoci che la cancellazione non avviene sempre. Infatti, se un evento non esiste, non può essere cancellato. Gestire i casi di errore (es. se l'utente vuole rimuovere un evento non esistente) e restituire un valore booleano che indica il risultato dell'operazione.
+
+```java
+public boolean removeEvento(int i)  {
+    if(i >= 0 && i < eventi.size()) {
+        eventi.remove(i);
+        return true;
+    }
+    return false;
+}
+```
+
+### Test 1 (evento presente e correttamente cancellato)
+
+```java
+if(calendario.removeEvento(0)) {
+    System.out.println("Evento cancellato dal calendario");
+}
+else {
+    System.out.println("Evento non esistente nel calendario");
+}
+
+calendario.getEventi();
+```
+
+Output
+```
+Evento cancellato dal calendario
+1. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
+```
+
+### Test 2 (evento _non_ presente)
+
+```java
+if(calendario.removeEvento(65)) {
+    System.out.println("Evento cancellato dal calendario");
+}
+else {
+    System.out.println("Evento non esistente nel calendario");
+}
+
+calendario.getEventi();
+```
+
+Output
+```
+Evento non esistente nel calendario
+1. Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
+2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
+```
