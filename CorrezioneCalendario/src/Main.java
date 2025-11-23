@@ -32,7 +32,7 @@ public class Main {
         // CARTA 3
         System.out.println("\n--- CARTA 3 ---");
 
-        if(calendario.removeEvento(0)) {
+        if(calendario.removeEvento(65)) {
             System.out.println("Evento cancellato dal calendario");
         }
         else {
@@ -40,5 +40,16 @@ public class Main {
         }
 
         calendario.getEventi();
+
+        // CARTA 4
+        System.out.println("\n--- CARTA 4 ---");
+        Evento risultato = calendario.cercaEvento("pane");
+
+        if(risultato == null) {
+            System.out.println("Nessun evento corrispondente");
+        }
+        else {
+            System.out.println("Risultato alla ricerca: " + risultato);
+        }
     }
 }

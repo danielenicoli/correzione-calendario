@@ -38,4 +38,15 @@ public class Calendario {
         }
         return false;
     }
+
+    // Ricerca evento per parola chiave contenuta nel titolo e/o nella descrizione
+    public Evento cercaEvento(String keyword) {
+        for(Evento e : eventi) {
+            if(e.getTitolo().toLowerCase().contains(keyword.toLowerCase()) ||
+                    e.getDescrizione().toLowerCase().contains(keyword.toLowerCase())) {
+                return e;  // Ritorna il primo evento che soddisfa la ricerca
+            }
+        }
+        return null; // Se non trova nulla
+    }
 }

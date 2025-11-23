@@ -208,3 +208,53 @@ Evento non esistente nel calendario
 1. Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
 2. Evento Leggere del 2025-12-05T10:45 (Finire fino al capitolo 3)
 ```
+
+## Carta 4 - Cercare un oggetto nella collezione
+La funzione `cercaEvento(String keyword) : Evento` permette di cercare un evento nella lista eventi in base a una parola chiave fornita dall'utente e restituisce il primo evento che corrispondei ai criteri di ricerca. La ricerca considera sia il titolo sia la descrizione dell’evento e ignora le differenze tra maiuscole e minuscole.
+
+### Implementazione ricerca
+#### Logica in pseudocodice
+Usiamo il ciclo [foreach](https://www.w3schools.com/java/java_foreach_loop.asp) per scorrere ogni elmento nella lista.
+
+1. Scorrere la lista degli eventi
+    - La funzione usa un ciclo for-each per analizzare ogni oggetto `Evento` nella lista eventi
+2. Confronto tra keyword e getter dell'evento
+    - Per ciascun evento, si confronta la parola chiave con:
+        - `e.getTitolo()`: il titolo dell'evento
+        - `e.getDescrizione()`: la descrizione dell'evento
+    - Si verifica se la keyword è contenuta in almeno una delle due stringhe (`OR`)
+3. Uso di toLowerCase()
+    - Convertire sia la keyword sia i campi dell'evento in minuscolo serve a rendere la ricerca case-insensitive
+    - Esempio: se l'utente cerca "Pane" e il titolo dell'evento è "Comprare pane e uova", la funzione riuscirà a trovarlo anche se le maiuscole non corrispondono
+4. Restituzione del primo evento trovato
+    - Appena si trova un evento che soddisfa la condizione, viene immediatamente ritornato
+    - Se non ci sono eventi corrispondenti, la funzione ritorna `null` (riferimento a oggetto nullo, non punta ad alcun oggetto)
+
+#### Java
+```java
+public Evento cercaEvento(String keyword) {
+    for(Evento e : eventi) {
+        if(e.getTitolo().toLowerCase().contains(keyword.toLowerCase()) ||
+                e.getDescrizione().toLowerCase().contains(keyword.toLowerCase())) {
+            return e;  // Ritorna il primo evento che soddisfa la ricerca
+        }
+    }
+    return null; // Se non trova nulla
+}
+```
+
+#### Test
+```java
+Evento risultato = calendario.cercaEvento("pane");
+
+if(risultato == null) {
+    System.out.println("Nessun evento corrispondente");
+}
+else {
+    System.out.println("Risultato alla ricerca: " + risultato);
+}
+```
+
+```
+Risultato alla ricerca: Evento Fare la spesa del 2025-12-01T10:30 (Comprare pane e uova)
+```
