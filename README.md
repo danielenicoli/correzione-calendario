@@ -315,6 +315,7 @@ La funzione `cercaEvento(LocalDate d) : ArrayList<Evento>` permette di cercare t
 1. Creare una lista vuota risultati
 2. Scorrere tutti gli eventi nella lista eventi
 3. Per ciascun evento, controllare se la data di `dataOra` è uguale (`.equals(Object obj)`) a `d`
+    - Consultare la [JavaDoc](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html#toLocalDate--) per _"Gets the LocalDate part of this date-time"_
 4. Se corrisponde, aggiungere l'evento alla lista risultati
 5. Restituire la lista risultati
 
@@ -354,4 +355,44 @@ calendario.getEventi(risultatiRicerca);
 
 ```
 1. Evento Leggere del 2025-11-23T15:48:01.623690300 (Finire fino al capitolo 3)
+```
+
+## Carta 7 - Introdurre un controllo e una validazione
+La funzione `controllaSlot(LocalDate d, LocalTime t) : boolean` permette di verificare se esiste già un evento nella lista eventi con la stessa data e ora. Restituisce `true` se lo slot è libero e `false` se esiste già un evento nello stesso momento.
+
+### Implementazione controllo e validazione
+#### Logica in pseudocodice
+1. Scorrere tutti gli eventi nella lista eventi
+2. Per ciascun evento, confrontare:
+    - `e.getDataOra().toLocalDate()` con `d`
+    - `e.getDataOra().toLocalTime()` con `t`
+    - [JavaDoc](https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html#equals-java.lang.Object-) per _"Checks if this date-time is equal to another date-time"_
+3. Se esiste un evento con stessa data e ora, ritorna `false`
+4. Se non esistono eventi in conflitto, ritorna `true`
+
+#### Java
+```java
+public boolean isSlotLibero(LocalDate d, LocalTime t) {
+    for(Evento e : eventi) {
+        if(e.getDataOra().toLocalDate().equals(d) &&
+                e.getDataOra().toLocalTime().equals(t)) {
+            return false; // Slot già occupato
+        }
+    }
+    return true; // Slot libero
+}
+```
+
+#### Test
+```java
+if(calendario.isSlotLibero(LocalDate.of(2025, 12, 1), LocalTime.of(11, 0))) {
+    System.out.println("Slot disponibile");
+}
+else {
+    System.out.println("Slot già occupato");
+}
+```
+
+```
+Slot già occupato
 ```

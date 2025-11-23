@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Main {
@@ -71,5 +72,14 @@ public class Main {
         LocalDate dataRicerca = LocalDate.now(); // Oggi
         ArrayList<Evento> risultatiRicerca = calendario.cercaEvento(dataRicerca);
         calendario.getEventi(risultatiRicerca);
+
+        // CARTA 7
+        System.out.println("\n--- CARTA 7 ---");
+        if(calendario.isSlotLibero(LocalDate.of(2025, 12, 1), LocalTime.of(11, 0))) {
+            System.out.println("Slot disponibile");
+        }
+        else {
+            System.out.println("Slot già occupato");
+        }
     }
 }

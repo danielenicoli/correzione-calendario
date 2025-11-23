@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Calendario {
@@ -88,4 +89,14 @@ public class Calendario {
         }
     }
 
+    // Controllo slot
+    public boolean isSlotLibero(LocalDate d, LocalTime t) {
+        for(Evento e : eventi) {
+            if(e.getDataOra().toLocalDate().equals(d) &&
+                    e.getDataOra().toLocalTime().equals(t)) {
+                return false; // Slot già occupato
+            }
+        }
+        return true; // Slot libero
+    }
 }
